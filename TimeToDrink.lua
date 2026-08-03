@@ -105,6 +105,9 @@ function TTD_InitHealerDropdown()
                 local t = getglobal("TimeToDrinkHealerDropdownText")
                 if t then t:SetText(nm) end
                 dbg("healer set to " .. nm)
+                if TTD_InFivePlayerParty() then
+                    SendChatMessage(nm .. " has been set as the healer in Time To Drink.  The party will be alerted when they drop below " .. TTD.threshold .. "% mana.", "PARTY")
+                end
             end
             UIDropDownMenu_AddButton(info)
             i = i + 1
@@ -235,7 +238,7 @@ local function TTD_CheckHealer()
     local pct = (UnitMana(unit) / maxMana) * 100
     if pct < TTD.threshold then
         if (GetTime() - TTD.lastAnnounce) >= TTD.cooldown then
-            SendChatMessage(TTD.selectedHealer .. " has less than " .. TTD.threshold .. "% mana", "PARTY")
+            SendChatMessage("The healer has less than " .. TTD.threshold .. "% mana", "PARTY")
             TTD.lastAnnounce = GetTime()
             dbg("announced (" .. math.floor(pct) .. "% now)")
         end
@@ -313,4 +316,4 @@ SlashCmdList["TIMETODRINK"] = function(arg)
     if not ok then err(e) end
 end
 
-msg("loaded v1.2. /ttd to open, /ttd status, /ttd test. (5-man parties only)")
+msg("loaded v1.3. /ttd to open, /ttd status, /ttd test. (5-man parties only)")
