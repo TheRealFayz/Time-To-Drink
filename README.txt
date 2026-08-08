@@ -1,4 +1,4 @@
-Time To Drink - Turtle WoW (vanilla 1.12) addon  v1.1
+Time To Drink - Turtle WoW (vanilla 1.12) addon  v1.0
 =====================================================
 
 WHAT IT DOES
